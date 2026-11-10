@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tigers & Lions — Kings of the Wild</title>
+<meta name="description" content="A tribute to the two most magnificent big cats on Earth: the tiger and the lion." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0705;
+    --bg2:#140d08;
+    --card:rgba(255,255,255,.045);
+    --border:rgba(255,255,255,.09);
+    --text:#f6f0ea;
+    --muted:#a99a8d;
+    --tiger:#ff7a18;
+    --tiger2:#ffb347;
+    --lion:#f2b134;
+    --lion2:#ffe08a;
+    --radius:22px;
+    --max:1180px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:90px}
+  body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.65;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand{font-family:'Outfit',sans-serif;line-height:1.08;letter-spacing:-.02em}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--tiger);color:#0a0705}
+
+  /* ---------- Scroll progress ---------- */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0%;
+    background:linear-gradient(90deg,var(--tiger),var(--lion2));
+    z-index:1000;box-shadow:0 0 16px rgba(255,122,24,.7);
+  }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:900;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px clamp(16px,4vw,40px);
+    background:rgba(10,7,5,.55);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+  }
+  .brand{font-weight:900;font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase}
+  .brand span{background:linear-gradient(90deg,var(--tiger),var(--lion2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav-links{display:flex;gap:clamp(14px,2.5vw,34px);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .nav-links a{transition:color .25s}
+  .nav-links a:hover{color:var(--text)}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;min-height:100vh;display:grid;place-items:center;
+    text-align:center;padding:120px 20px 80px;overflow:hidden;
+  }
+  .hero::before,.hero::after{
+    content:'';position:absolute;border-radius:50%;filter:blur(110px);opacity:.55;z-index:0;
+  }
+  .hero::before{
+    width:60vw;height:60vw;max-width:700px;max-height:700px;
+    background:radial-gradient(circle,var(--tiger),transparent 65%);
+    top:-15%;left:-15%;animation:float1 16s ease-in-out infinite;
+  }
+  .hero::after{
+    width:55vw;height:55vw;max-width:650px;max-height:650px;
+    background:radial-gradient(circle,var(--lion),transparent 65%);
+    bottom:-20%;right:-12%;animation:float2 20s ease-in-out infinite;
+  }
+  @keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,40px) scale(1.12)}}
+  @keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-50px,-40px) scale(1.15)}}
+
+  .hero-inner{position:relative;z-index:2;max-width:900px}
+  .eyebrow{
+    display:inline-block;font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--muted);border:1px solid var(--border);border-radius:999px;
+    padding:8px 20px;margin-bottom:28px;backdrop-filter:blur(8px);
+    animation:fadeUp .9s .1s both;
+  }
+  .hero h1{
+    font-size:clamp(2.9rem,9vw,6.8rem);font-weight:900;letter-spacing:-.04em;
+    animation:fadeUp .9s .25s both;
+  }
+  .hero h1 .g{
+    background:linear-gradient(100deg,var(--tiger) 10%,var(--tiger2) 40%,var(--lion2) 70%,var(--lion));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{
+    margin:26px auto 0;max-width:560px;color:var(--muted);
+    font-size:clamp(1rem,1.6vw,1.15rem);font-weight:300;
+    animation:fadeUp .9s .4s both;
+  }
+  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:42px;animation:fadeUp .9s .55s both}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:15px 32px;border-radius:999px;font-weight:500;font-size:.95rem;
+    border:1px solid transparent;cursor:pointer;transition:transform .3s, box-shadow .3s, background .3s;
+  }
+  .btn:hover{transform:translateY(-3px)}
+  .btn-primary{
+    background:linear-gradient(100deg,var(--tiger),var(--lion));
+    color:#140d08;font-weight:700;box-shadow:0 12px 40px -12px rgba(255,122,24,.85);
+  }
+  .btn-primary:hover{box-shadow:0 20px 50px -12px rgba(255,122,24,1)}
+  .btn-ghost{background:rgba(255,255,255,.04);border-color:var(--border);color:var(--text);backdrop-filter:blur(10px)}
+  .btn-ghost:hover{background:rgba(255,255,255,.09)}
+
+  .scroll-hint{
+    position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+    font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);
+    z-index:2;animation:bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0);opacity:.55}50%{transform:translate(-50%,8px);opacity:1}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+
+  /* ---------- Sections ---------- */
+  .section{padding:clamp(80px,11vw,150px) clamp(18px,4vw,40px);position:relative}
+  .wrap{max-width:var(--max);margin:0 auto}
+  .section-head{max-width:660px;margin-bottom:clamp(40px,6vw,70px)}
+  .kicker{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--tiger2);margin-bottom:14px;display:block}
+  .section h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:900}
+  .section h2 .g{
+    background:linear-gradient(100deg,var(--tiger),var(--lion2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lead{color:var(--muted);margin-top:18px;font-weight:300;font-size:1.05rem}
+
+  /* Divider glow */
+  .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,122,24,.5),transparent);max-width:var(--max);margin:0 auto}
+
+  /* ---------- Split section ---------- */
+  .split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);align-items:center}
+  @media(max-width:860px){.split{grid-template-columns:1fr}}
+
+  .figure{
+    position:relative;aspect-ratio:1/1;border-radius:32px;overflow:hidden;
+    display:grid;place-items:center;border:1px solid var(--border);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .figure:hover{transform:scale(1.02) rotate(-.6deg)}
+  .figure.tiger{background:
+      radial-gradient(circle at 30% 25%,rgba(255,180,71,.5),transparent 55%),
+      radial-gradient(circle at 75% 80%,rgba(255,80,0,.55),transparent 60%),
+      linear-gradient(150deg,#1e1108,#0a0705);}
+  .figure.lion{background:
+      radial-gradient(circle at 70% 25%,rgba(255,224,138,.5),transparent 55%),
+      radial-gradient(circle at 25% 80%,rgba(242,177,52,.5),transparent 60%),
+      linear-gradient(150deg,#1e1508,#0a0705);}
+  .figure .emo{
+    font-size:clamp(7rem,16vw,13rem);line-height:1;
+    filter:drop-shadow(0 30px 50px rgba(0,0,0,.7));
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .figure:hover .emo{transform:scale(1.08)}
+  .figure .tag{
+    position:absolute;bottom:22px;left:22px;
+    font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
+    background:rgba(10,7,5,.6);border:1px solid var(--border);
+    padding:8px 16px;border-radius:999px;backdrop-filter:blur(10px);
+  }
+
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:34px}
+  .stat{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px;transition:transform .35s,border-color .35s,background .35s;
+  }
+  .stat:hover{transform:translateY(-4px);border-color:rgba(255,122,24,.45);background:rgba(255,255,255,.07)}
+  .stat b{display:block;font-family:'Outfit',sans-serif;font-size:clamp(1.5rem,3.4vw,2rem);font-weight:700;
+    background:linear-gradient(100deg,var(--tiger2),var(--lion2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat span{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---------- Compare table ---------- */
+  .table-wrap{
+    border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+    background:var(--card);backdrop-filter:blur(10px);
+  }
+  table{width:100%;border-collapse:collapse;font-size:.95rem}
+  th,td{padding:18px 20px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+  thead th{font-family:'Outfit',sans-serif;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:500;background:rgba(255,255,255,.03)}
+  thead th:nth-child(2){color:var(--tiger2)}
+  thead th:nth-child(3){color:var(--lion2)}
+  tbody tr{transition:background .3s}
+  tbody tr:hover{background:rgba(255,255,255,.035)}
+  tbody tr:last-child td{border-bottom:none}
+  td:first-child{color:var(--muted);font-size:.85rem;letter-spacing:.04em}
+  @media(max-width:640px){
+    th,td{padding:13px 12px;font-size:.85rem}
+    td:first-child{font-size:.75rem}
+  }
+
+  /* ---------- Facts grid ---------- */
+  .grid{display:grid;gap:18px}
+  .facts{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .card{
+    position:relative;background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:30px 26px;overflow:hidden;
+    transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .45s,background .45s;
+  }
+  .card::before{
+    content:'';position:absolute;inset:0;opacity:0;transition:opacity .45s;
+    background:radial-gradient(600px circle at var(--mx,50%) var(--my,0%),rgba(255,122,24,.13),transparent 45%);
+  }
+  .card:hover{transform:translateY(-6px);border-color:rgba(255,122,24,.4);background:rgba(255,255,255,.065)}
+  .card:hover::before{opacity:1}
+  .card .ico{font-size:1.9rem;margin-bottom:16px;display:block}
+  .card h3{font-size:1.15rem;font-weight:700;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:.94rem;font-weight:300}
+
+  /* ---------- Gallery ---------- */
+  .gallery{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .shot{
+    position:relative;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;
+    display:grid;place-items:center;border:1px solid var(--border);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s;
+  }
+  .shot:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 30px 60px -25px rgba(255,122,24,.6)}
+  .shot .emo{font-size:clamp(3.5rem,8vw,5.5rem);transition:transform .6s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 14px 24px rgba(0,0,0,.6))}
+  .shot:hover .emo{transform:scale(1.18) rotate(-4deg)}
+  .shot small{
+    position:absolute;bottom:14px;left:16px;font-size:.7rem;
+    letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.75);
+  }
+  .shot:nth-child(1){background:linear-gradient(140deg,#3a1c07,#0a0705)}
+  .shot:nth-child(2){background:linear-gradient(140deg,#3a2f07,#0a0705)}
+  .shot:nth-child(3){background:linear-gradient(140deg,#2b1204,#0a0705)}
+  .shot:nth-child(4){background:linear-gradient(140deg,#332806,#0a0705)}
+  .shot:nth-child(5){background:linear-gradient(140deg,#401f08,#0a0705)}
+  .shot:nth-child(6){background:linear-gradient(140deg,#2f2305,#0a0705)}
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--border);padding:60px clamp(18px,4vw,40px);
+    text-align:center;color:var(--muted);font-size:.88rem;
+    background:radial-gradient(circle at 50% 0%,rgba(255,122,24,.09),transparent 60%);
+  }
+  footer .big{font-family:'Outfit',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:900;color:var(--text);margin-bottom:12px}
+  footer .big span{background:linear-gradient(100deg,var(--tiger),var(--lion2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+  .reveal.visible{opacity:1;transform:none}
+  .grid .reveal:nth-child(2){transition-delay:.08s}
+  .grid .reveal:nth-child(3){transition-delay:.16s}
+  .grid .reveal:nth-child(4){transition-delay:.24s}
+  .grid .reveal:nth-child(5){transition-delay:.32s}
+  .grid .reveal:nth-child(6){transition-delay:.4s}
+
+  /* ---------- To top ---------- */
+  .to-top{
+    position:fixed;right:22px;bottom:22px;width:50px;height:50px;border-radius:50%;
+    display:grid;place-items:center;cursor:pointer;font-size:1.15rem;
+    background:linear-gradient(100deg,var(--tiger),var(--lion));
+    color:#140d08;border:none;z-index:800;
+    opacity:0;pointer-events:none;transform:translateY(16px);
+    transition:opacity .35s,transform .35s,box-shadow .35s;
+    box-shadow:0 14px 34px -12px rgba(255,122,24,.9);
+  }
+  .to-top.show{opacity:1;pointer-events:auto;transform:none}
+  .to-top:hover{box-shadow:0 18px 44px -12px rgba(255,122,24,1)}
+
+  @media(max-width:720px){
+    .nav-links{display:none}
+    .stats{grid-template-columns:1fr 1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<header class="nav">
+  <div class="brand">Wild<span>Kings</span></div>
+  <nav class="nav-links">
+    <a href="#tiger">Tiger</a>
+    <a href="#lion">Lion</a>
+    <a href="#compare">Compare</a>
+    <a href="#facts">Facts</a>
+    <a href="#gallery">Gallery</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">A Tribute to the Wild</div>
+      <h1>Tigers <span class="g">&amp; Lions</span></h1>
+      <p>Two apex predators. One striped ghost of the Asian forests, one golden monarch of the African savanna. Discover what makes them the most iconic big cats on Earth.</p>
+      <div class="cta">
+        <a href="#tiger" class="btn btn-primary">Meet the Tiger 🐯</a>
+        <a href="#lion" class="btn btn-ghost">Meet the Lion 🦁</a>
+      </div>
+    </div>
+    <div class="scroll-hint">Scroll</div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TIGER -->
+  <section class="section" id="tiger">
+    <div class="wrap split">
+      <div>
+        <span class="kicker reveal">Panthera Tigris</span>
+        <h2 class="reveal">The <span class="g">Tiger</span></h2>
+        <p class="lead reveal">The largest living cat species. A solitary ambush hunter whose stripes are as unique as a fingerprint — no two tigers share the same pattern.</p>
+        <div class="stats">
+          <div class="stat reveal"><b><span data-count="300">0</span> kg</b><span>Max weight</span></div>
+          <div class="stat reveal"><b><span data-count="60">0</span> km/h</b><span>Top speed</span></div>
+          <div class="stat reveal"><b><span data-count="5574">0</span></b><span>Wild population</span></div>
+          <div class="stat reveal"><b><span data-count="15">0</span> yrs</b><span>Lifespan</span></div>
+        </div>
+      </div>
+      <div class="figure tiger reveal">
+        <div class="emo">🐯</div>
+        <div class="tag">Forest · Swamp · Taiga</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LION -->
+  <section class="section" id="lion">
+    <div class="wrap split">
+      <div class="figure lion reveal">
+        <div class="emo">🦁</div>
+        <div class="tag">Savanna · Grassland</div>
+      </div>
+      <div>
+        <span class="kicker reveal">Panthera Leo</span>
+        <h2 class="reveal">The <span class="g">Lion</span></h2>
+        <p class="lead reveal">The only truly social big cat. Lions live in prides, hunt together, and defend territory as a family — a rarity among solitary felines.</p>
+        <div class="stats">
+          <div class="stat reveal"><b><span data-count="250">0</span> kg</b><span>Max weight</span></div>
+          <div class="stat reveal"><b><span data-count="80">0</span> km/h</b><span>Top speed</span></div>
+          <div class="stat reveal"><b><span data-count="23000">0</span></b><span>Wild population</span></div>
+          <div class="stat reveal"><b><span data-count="14">0</span> yrs</b><span>Lifespan</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- COMPARE -->
+  <section class="section" id="compare">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker reveal">Head to Head</span>
+        <h2 class="reveal">Tiger <span class="g">vs</span> Lion</h2>
+        <p class="lead reveal">Two different strategies for ruling the wild.</p>
+      </div>
+
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr><th>Trait</th><th>🐯 Tiger</th><th>🦁 Lion</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Scientific name</td><td>Panthera tigris</td><td>Panthera leo</td></tr>
+            <tr><td>Weight</td><td>220–300 kg</td><td>150–250 kg</td></tr>
+            <tr><td>Top speed</td><td>up to 60 km/h</td><td>up to 80 km/h</td></tr>
+            <tr><td>Social life</td><td>Solitary</td><td>Highly social (prides)</td></tr>
+            <tr><td>Habitat</td><td>Asia — forests, swamps, taiga</td><td>Africa &amp; India — savanna</td></tr>
+            <tr><td>Hunting style</td><td>Alone, ambush</td><td>Females hunt in groups</td></tr>
+            <tr><td>Roar heard from</td><td>~3 km</td><td>~8 km</td></tr>
+            <tr><td>Wild population</td><td>~5,600</td><td>~23,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FACTS -->
+  <section class="section" id="facts">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker reveal">Did You Know?</span>
+        <h2 class="reveal">Mind-Blowing <span class="g">Facts</span></h2>
+      </div>
+
+      <div class="grid facts">
+        <article class="card reveal">
+          <span class="ico">🌊</span>
+          <h3>Swimming tigers</h3>
+          <p>Tigers are excellent swimmers and genuinely enjoy water — unlike most cats. They often cool off in rivers and ponds.</p>
+        </article>
+        <article class="card reveal">
+          <span class="ico">🖤</span>
+          <h3>Skin like stripes</h3>
+          <p>A tiger's stripes aren't just fur — the skin underneath is striped too. Every pattern is unique to the individual.</p>
+        </article>
+        <article class="card reveal">
+          <span class="ico">📢</span>
+          <h3>Loudest cat</h3>
+          <p>A lion's roar can carry up to 8 kilometres across open savanna. A tiger's can be heard about 3 km away.</p>
+        </article>
+        <article class="card reveal">
+          <span class="ico">👑</span>
+          <h3>Pride dynamics</h3>
+          <p>Lionesses do most of the hunting, while males patrol and defend the pride's territory from rivals.</p>
+        </article>
+        <article class="card reveal">
+          <span class="ico">🌙</span>
+          <h3>Night hunters</h3>
+          <p>Tigers are primarily nocturnal. Their night vision is roughly six times more sensitive than a human's.</p>
+        </article>
+        <article class="card reveal">
+          <span class="ico">⚡</span>
+          <h3>Short bursts</h3>
+          <p>Both cats are sprinters, not marathon runners. Lions and tigers rely on explosive speed over very short distances.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GALLERY -->
+  <section class="section" id="gallery">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker reveal">Mood Board</span>
+        <h2 class="reveal">Wild <span class="g">Gallery</span></h2>
+        <p class="lead reveal">A visual mood board inspired by stripes and manes.</p>
+      </div>
+
+      <div class="grid gallery">
+        <div class="shot reveal"><span class="emo">🐯</span><small>Stripes</small></div>
+        <div class="shot reveal"><span class="emo">🦁</span><small>Mane</small></div>
+        <div class="shot reveal"><span class="emo">🐅</span><small>Ambush</small></div>
+        <div class="shot reveal"><span class="emo">🦁</span><small>Pride</small></div>
+        <div class="shot reveal"><span class="emo">🐯</span><small>Golden Hour</small></div>
+        <div class="shot reveal"><span class="emo">🐅</span><small>Eye Contact</small></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="big">Wild<span>Kings</span></div>
+  <p>Made with 🧡 as a demo tribute to the tiger and the lion.</p>
+</footer>
+
+<button class="to-top" aria-label="Back to top">↑</button>
+
+<script>
+  /* Scroll progress + back-to-top */
+  const progress = document.querySelector('.progress');
+  const toTop = document.querySelector('.to-top');
+  const onScroll = () => {
+    const el = document.documentElement;
+    const max = el.scrollHeight - el.clientHeight;
+    progress.style.width = (max > 0 ? (el.scrollTop / max) * 100 : 0) + '%';
+    toTop.classList.toggle('show', el.scrollTop > 600);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* Reveal on scroll */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+  /* Animated counters */
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const duration = 1500;
+      const start = performance.now();
+
+      const step = (now) => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased).toLocaleString('en-US');
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+      countObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach((el) => countObserver.observe(el));
+
+  /* Cursor glow inside cards */
+  document.querySelectorAll('.card').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+</script>
+</body>
+          </html>
