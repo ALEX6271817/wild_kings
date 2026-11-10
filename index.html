@@ -38,14 +38,12 @@
   a{color:inherit;text-decoration:none}
   ::selection{background:var(--tiger);color:#0a0705}
 
-  /* ---------- Scroll progress ---------- */
   .progress{
     position:fixed;top:0;left:0;height:3px;width:0%;
     background:linear-gradient(90deg,var(--tiger),var(--lion2));
     z-index:1000;box-shadow:0 0 16px rgba(255,122,24,.7);
   }
 
-  /* ---------- Nav ---------- */
   .nav{
     position:fixed;top:0;left:0;right:0;z-index:900;
     display:flex;align-items:center;justify-content:space-between;
@@ -61,7 +59,6 @@
   .nav-links a{transition:color .25s}
   .nav-links a:hover{color:var(--text)}
 
-  /* ---------- Hero ---------- */
   .hero{
     position:relative;min-height:100vh;display:grid;place-items:center;
     text-align:center;padding:120px 20px 80px;overflow:hidden;
@@ -125,7 +122,6 @@
   @keyframes bob{0%,100%{transform:translate(-50%,0);opacity:.55}50%{transform:translate(-50%,8px);opacity:1}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
 
-  /* ---------- Sections ---------- */
   .section{padding:clamp(80px,11vw,150px) clamp(18px,4vw,40px);position:relative}
   .wrap{max-width:var(--max);margin:0 auto}
   .section-head{max-width:660px;margin-bottom:clamp(40px,6vw,70px)}
@@ -137,10 +133,8 @@
   }
   .lead{color:var(--muted);margin-top:18px;font-weight:300;font-size:1.05rem}
 
-  /* Divider glow */
   .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,122,24,.5),transparent);max-width:var(--max);margin:0 auto}
 
-  /* ---------- Split section ---------- */
   .split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);align-items:center}
   @media(max-width:860px){.split{grid-template-columns:1fr}}
 
@@ -150,25 +144,13 @@
     transition:transform .5s cubic-bezier(.2,.8,.2,1);
   }
   .figure:hover{transform:scale(1.02) rotate(-.6deg)}
-  .figure.tiger{background:
-      radial-gradient(circle at 30% 25%,rgba(255,180,71,.5),transparent 55%),
-      radial-gradient(circle at 75% 80%,rgba(255,80,0,.55),transparent 60%),
-      linear-gradient(150deg,#1e1108,#0a0705);}
-  .figure.lion{background:
-      radial-gradient(circle at 70% 25%,rgba(255,224,138,.5),transparent 55%),
-      radial-gradient(circle at 25% 80%,rgba(242,177,52,.5),transparent 60%),
-      linear-gradient(150deg,#1e1508,#0a0705);}
-  .figure .emo{
-    font-size:clamp(7rem,16vw,13rem);line-height:1;
-    filter:drop-shadow(0 30px 50px rgba(0,0,0,.7));
-    transition:transform .5s cubic-bezier(.2,.8,.2,1);
-  }
-  .figure:hover .emo{transform:scale(1.08)}
+  
   .figure .tag{
     position:absolute;bottom:22px;left:22px;
     font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
     background:rgba(10,7,5,.6);border:1px solid var(--border);
     padding:8px 16px;border-radius:999px;backdrop-filter:blur(10px);
+    z-index: 2;
   }
 
   .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:34px}
@@ -181,7 +163,6 @@
     background:linear-gradient(100deg,var(--tiger2),var(--lion2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .stat span{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
-  /* ---------- Compare table ---------- */
   .table-wrap{
     border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
     background:var(--card);backdrop-filter:blur(10px);
@@ -200,7 +181,6 @@
     td:first-child{font-size:.75rem}
   }
 
-  /* ---------- Facts grid ---------- */
   .grid{display:grid;gap:18px}
   .facts{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
   .card{
@@ -218,7 +198,6 @@
   .card h3{font-size:1.15rem;font-weight:700;margin-bottom:10px}
   .card p{color:var(--muted);font-size:.94rem;font-weight:300}
 
-  /* ---------- Gallery ---------- */
   .gallery{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
   .shot{
     position:relative;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;
@@ -239,7 +218,6 @@
   .shot:nth-child(5){background:linear-gradient(140deg,#401f08,#0a0705)}
   .shot:nth-child(6){background:linear-gradient(140deg,#2f2305,#0a0705)}
 
-  /* ---------- Footer ---------- */
   footer{
     border-top:1px solid var(--border);padding:60px clamp(18px,4vw,40px);
     text-align:center;color:var(--muted);font-size:.88rem;
@@ -248,7 +226,6 @@
   footer .big{font-family:'Outfit',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:900;color:var(--text);margin-bottom:12px}
   footer .big span{background:linear-gradient(100deg,var(--tiger),var(--lion2));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-  /* ---------- Reveal ---------- */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
   .reveal.visible{opacity:1;transform:none}
   .grid .reveal:nth-child(2){transition-delay:.08s}
@@ -257,7 +234,6 @@
   .grid .reveal:nth-child(5){transition-delay:.32s}
   .grid .reveal:nth-child(6){transition-delay:.4s}
 
-  /* ---------- To top ---------- */
   .to-top{
     position:fixed;right:22px;bottom:22px;width:50px;height:50px;border-radius:50%;
     display:grid;place-items:center;cursor:pointer;font-size:1.15rem;
@@ -327,10 +303,13 @@
           <div class="stat reveal"><b><span data-count="15">0</span> yrs</b><span>Lifespan</span></div>
         </div>
       </div>
+      
+      <!-- ТУТ ТВОЕ ФОТО ТИГРА -->
       <div class="figure tiger reveal">
-        <div class="emo">🐯</div>
-        <div class="tag">Forest · Swamp · Taiga</div>
+        <img src="https://i.postimg.cc/C5626t4V/2822b417-6658-4664-b9e7-3f3e6b7befa7.jpg" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;" alt="Tiger">
+        <div class="tag" style="z-index: 2;">Forest · Swamp · Taiga</div>
       </div>
+      
     </div>
   </section>
 
@@ -339,10 +318,13 @@
   <!-- LION -->
   <section class="section" id="lion">
     <div class="wrap split">
+      
+      <!-- ТУТ ФОТО ЛЬВА (взял из интернета) -->
       <div class="figure lion reveal">
-        <div class="emo">🦁</div>
-        <div class="tag">Savanna · Grassland</div>
+        <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=1000&auto=format&fit=crop" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;" alt="Lion">
+        <div class="tag" style="z-index: 2;">Savanna · Grassland</div>
       </div>
+      
       <div>
         <span class="kicker reveal">Panthera Leo</span>
         <h2 class="reveal">The <span class="g">Lion</span></h2>
@@ -465,7 +447,6 @@
 <button class="to-top" aria-label="Back to top">↑</button>
 
 <script>
-  /* Scroll progress + back-to-top */
   const progress = document.querySelector('.progress');
   const toTop = document.querySelector('.to-top');
   const onScroll = () => {
@@ -478,7 +459,6 @@
   onScroll();
   toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  /* Reveal on scroll */
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -489,7 +469,6 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
-  /* Animated counters */
   const countObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
@@ -510,7 +489,6 @@
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-count]').forEach((el) => countObserver.observe(el));
 
-  /* Cursor glow inside cards */
   document.querySelectorAll('.card').forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const r = card.getBoundingClientRect();
